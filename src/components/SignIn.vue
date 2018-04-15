@@ -50,6 +50,7 @@
 
 <script>
 import Menu from "./Menu";
+import Router from "../router";
 
 export default {
     data() {
@@ -62,6 +63,7 @@ export default {
     methods: {
         login() {
             alert(this.email + " " + this.password);
+            Router.push({name:"Dashboard"})
         }
     }
 }
