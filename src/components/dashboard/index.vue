@@ -11,15 +11,11 @@
             </ul>
             </div>
         </nav>
-        <Sidenav option="habit"/>
-        <Habits />
-        <NewHabit />
+        <Sidenav @clicked='setActiveMenu'/>
+        <Habits v-if="optionMenu == 'habits'"/>
+        <Tasks v-if="optionMenu == 'tasks'"/>
 
-        <div class="fixed-action-btn">
-        <button data-target="modal1" class="btn-floating btn-large red modal-trigger">
-            <i class="large material-icons">add</i>
-        </button>
-        </div>
+        
     </div>
 
 </template>
@@ -27,23 +23,29 @@
 <script>
 import Sidenav from "./sidenav";
 import Habits from "./habits";
-import NewHabit from "./newHabit";
+import Tasks from "./tasks";
+//import Report from "./reports";*/
+
     export default {
-        components: {Sidenav, Habits, NewHabit},
+        components: {Sidenav, Habits, Tasks},
         data() {
             return {
                 instance_sidenav : null,
+                optionMenu : "habits"
             }
         },
         mounted() {
             this.instance_sidenav = M.Sidenav.init(document.querySelector('.sidenav'), {"draggable":true});
             var instance_collapsible = M.Collapsible.init(document.querySelector('.collapsible'));
             var instance = M.FormSelect.init(document.querySelector('select'));
-            var instance_modal = M.Modal.init(document.querySelector('.modal'));
+           
         },
         methods: {
             openMenu() {
                 this.instance_sidenav.open();
+            },
+            setActiveMenu(val) {
+                this.optionMenu = val;
             }
         }
     }

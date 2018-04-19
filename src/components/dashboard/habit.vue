@@ -8,10 +8,10 @@
             </div>
             <div class="row right">
                 <div class="col s6">
-                    <a class="btn-floating waves-effect waves-light responsive-img"><i class="material-icons">add</i></a>
+                    <a class="btn-floating waves-effect waves-light responsive-img purple darken-1"><i class="material-icons light-green-text ">add</i></a>
                 </div>
                 <div class="col s6">
-                    <a class="btn-floating waves-effect waves-light responsive-img"><i class="material-icons">remove</i></a>
+                    <a class="btn-floating purple darken-1 waves-effect waves-light responsive-img"><i class="material-icons">remove</i></a>
                 </div>
             </div>
             </div>
