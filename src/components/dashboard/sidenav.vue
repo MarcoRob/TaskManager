@@ -19,9 +19,9 @@
             </a>
         </li>
         <li><div class="divider"></div></li>
-        <li :class="{active : activeOption == 'reports'}">
-            <a @click="setActive('account')"><i class="material-icons">insert_chart</i>Reports</a>
-        </li>
+        <li><a class="subheader">Reports</a></li>
+        <li :class="{active : activeOption == 'userReport'}"><a @click="setActive('userReport')"><i class="material-icons">insert_chart</i>User</a></li>
+        <li :class="{active : activeOption == 'adminReport'}"><a @click="setActive('adminReport')"><i class="material-icons">insert_chart</i>Admin</a></li>
         <li>&nbsp;</li><li>&nbsp;</li>
         <li><div class="divider"></div></li>
         <li>

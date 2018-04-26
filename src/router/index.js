@@ -13,7 +13,7 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: Home
+      component: Home,
     },
     {
       path: '/signin',
@@ -21,9 +21,10 @@ export default new Router({
       component: SignIn
     },
     {
-      path: '/app',
+      path: '/app/:userId',
       name: 'Dashboard',
-      component: Dashboard
+      component: Dashboard,
+      props : true
     }
   ]
 })

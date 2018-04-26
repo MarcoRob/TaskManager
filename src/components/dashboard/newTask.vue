@@ -40,8 +40,10 @@
 </template>
 
 <script>
-
+import axios from "axios";
+import url from "../../config";
 export default {
+    props: ["tasks"],
     data() {
         return {
             title: "",
@@ -54,12 +56,37 @@ export default {
     },
     methods : {
         createTask() {
-            //this.dueDate = document.querySelector("input[class=datepicker]").value;
+            var fieldDate = this.dueDate.split("-");
+            
+            var due_date = new Date();
+                due_date.setFullYear(fieldDate[0]);
+                due_date.setMonth(parseInt(fieldDate[1]) - 1);
+                due_date.setDate(fieldDate[2]);
+
+            alert(due_date.toString());
+                due_date = Math.round(due_date.getTime() / 1000);
+
             var newTask = {
-                titulo : this.title,
-                descripcion : this.description,
-                dueDate : this.dueDate
+                title : this.title,
+                description : this.description,
+                dueDate : due_date,
+                userId : this.$route.params.userId
             };
+            axios.post(url.tasks_api + "/Task/tasks", newTask)
+                .then(res => {
+                    var statusCode = res.statusCode;
+                    if(statusCode == 200) {
+                        alert("Task Created");
+                        this.tasks.push(res.data);
+                    }
+                })
+                .catch(error => {
+                    alert(error.data);
+                })
+            this.title = "";
+            this.description = "";
+            this.dueDate = "";
+                
             alert(JSON.stringify(newTask));
         }
     }

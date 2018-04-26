@@ -51,6 +51,7 @@
 <script>
 import Menu from "./Menu";
 import Router from "../router";
+import axios from "axios";
 
 export default {
     data() {
@@ -62,8 +63,18 @@ export default {
     components: { Menu },
     methods: {
         login() {
-            alert(this.email + " " + this.password);
-            Router.push({name:"Dashboard"})
+            let newUser = {"email":this.email};
+            axios.post("http://localhost:8000/users/login", newUser)
+                .then(res => {
+                    console.log(res.data)
+                    alert(res.data.message);
+                    Router.push({name:"Dashboard", params: { userId: res.data.user }})
+                })
+                .catch(error => {
+                    alert(error.data);
+                })
+            //alert(this.email + " " + this.password);
+            
         }
     }
 }

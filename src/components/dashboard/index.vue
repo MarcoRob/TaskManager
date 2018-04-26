@@ -12,10 +12,11 @@
             </div>
         </nav>
         <Sidenav @clicked='setActiveMenu'/>
-        <Habits v-if="optionMenu == 'habits'"/>
-        <Tasks v-if="optionMenu == 'tasks'"/>
+        <Habits v-if="optionMenu == 'habits'" />
+        <Tasks v-if="optionMenu == 'tasks'" />
+        <UserReport v-if="optionMenu == 'userReport'" />
+        <AdminReport v-if="optionMenu == 'adminReport'" />
 
-        
     </div>
 
 </template>
@@ -24,14 +25,19 @@
 import Sidenav from "./sidenav";
 import Habits from "./habits";
 import Tasks from "./tasks";
+import UserReport from "./reports/user";
+import AdminReport from "./reports/admin";
+
+
 //import Report from "./reports";*/
 
     export default {
-        components: {Sidenav, Habits, Tasks},
+        components: {Sidenav, Habits, Tasks, UserReport, AdminReport},
         data() {
             return {
                 instance_sidenav : null,
-                optionMenu : "habits"
+                optionMenu : "habits",
+                userId : this.$route.params.userId
             }
         },
         mounted() {
