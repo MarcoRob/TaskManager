@@ -29,8 +29,8 @@
                 </div>
             </form>
         </div>
-        <div class="modal-footer">
-            <button href="#!" @click="createTask" class="btn modal-action modal-close waves-effect waves-green">
+        <div class="center">
+            <button href="#!" @click="createTask" class="btn btn-large modal-action modal-close waves-effect waves-green">
                 <i class="material-icons left">add</i> Create
             </button>
         </div>
