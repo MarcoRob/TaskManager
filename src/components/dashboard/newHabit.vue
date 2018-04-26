@@ -93,7 +93,7 @@ export default {
                 .catch(error => {
                     alert(error);
                 })
-            alert(JSON.stringify(newHabit));
+            //alert(JSON.stringify(newHabit));
         }
     }
 }

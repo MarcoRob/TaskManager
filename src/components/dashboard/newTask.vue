@@ -87,7 +87,7 @@ export default {
             this.description = "";
             this.dueDate = "";
                 
-            alert(JSON.stringify(newTask));
+            //alert(JSON.stringify(newTask));
         }
     }
 }

@@ -107,7 +107,7 @@ export default {
                 .catch(error => {
                     alert(error);
                 })
-            alert(JSON.stringify(editHabit));
+            //alert(JSON.stringify(editHabit));
         }
     }
 }
