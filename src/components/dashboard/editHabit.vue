@@ -12,6 +12,7 @@
                         <input id="first_name" type="text" v-model="title" placeholder="Title">
                     </div>
                 </div>
+                <div class="title">Difficulty</div>
                 <div class="row">
                     <div class="input-field col s4">
                         <p>
@@ -38,6 +39,7 @@
                         </p>
                     </div>
                 </div>
+                <div class="title">Type</div>
                 <div class="row">
                     <div class="input-field col s4">
                         <p>
@@ -102,6 +104,7 @@ export default {
                 .then(res => {
                     if(res.statusCode == 200) {
                         alert("Habit Updated!");
+                        location.reload();
                     }
                 })
                 .catch(error => {
@@ -117,6 +120,7 @@ export default {
 <style>
 
 .modal {
-    height: 550px;
+    height: 150em;
+    width: 60em;
 }
 </style>

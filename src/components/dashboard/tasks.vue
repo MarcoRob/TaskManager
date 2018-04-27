@@ -5,8 +5,20 @@
                 <h3 class="grey-text darken-2"><b>Your Tasks</b></h3>
             </div>
             <div class="row">
+                <div class="row chip blue accent-1">
+                    <i class="close material-icons">assignment</i>Reminder for Today
+                </div>
+                <div class="row chip red accent-1">
+                    <i class="close material-icons">assignment</i>Tasks for today
+                </div>
+                <div class="row chip">
+                    <i class="close material-icons">assignment</i>On Time
+                </div>
+            </div>
+            <div class="row">
                 <div class="col s12 m4 l4" v-for="task in tasks">
-                    <Task :title="task.title" :dueDate="task.dueDate" :description="task.description" :color="task.color" @click="openTask()"/>
+                    <Task :remindDate="task.remindDate" :title="task.title" :dueDate="task.dueDate" :description="task.description" :color="task.color" @click="openTask()" :taskId="task.id"/>
+                    <EditTask :title="task.title" :description="task.description" :taskId="task.id" />
                 </diV>
             </div>
         </div>
@@ -24,6 +36,7 @@
 <script>
 import Task from "./task";
 import NewTask from "./newTask";
+import EditTask from "./editTask";
 import axios from "axios";
 import url from "../../config";
 
@@ -35,7 +48,7 @@ var tasks = [{name:"Make Clean Code", description: "Make a clean code using SOLI
                     {name:"SW Qualitty", description: "Make a SW Quality", dueDate:"15/08/18", color:"red accent-1"},
                     {name:"SW Qualitty", description: "Make a SW Quality", dueDate:"15/08/18"},];
 export default {
-    components: {Task, NewTask},
+    components: {Task, NewTask, EditTask},
     data() {
         return {
             tasks: [],//[]
@@ -43,7 +56,10 @@ export default {
         }
     },
     beforeMount() {
-        this.getUserTasks();
+        axios.get(url.tasks_api + "/Task/users/" + this.$route.params.userId + "/tasks")
+                .then(res => {
+                    this.tasks = res.data;
+                })
     },
     mounted() {
          var instance_modal = M.Modal.init(document.querySelector('.modal'));

@@ -6,7 +6,7 @@
         </div>
         <div class="row">
             <div class="col s12 m4 l4" v-for="h in habits" :key="h.id">
-                <Habit :habitId="h._id" :title="h.title" :color="h.color" :score="h.score"/>
+                <Habit :habitId="h._id" :title="h.title" :color="h.color" :score="h.score" :type="h.type"/>
                 
                 <EditHabit :habitId="h._id" :title="h.title" :difficulty="h.difficulty" :type="h.type"/>
             </div>

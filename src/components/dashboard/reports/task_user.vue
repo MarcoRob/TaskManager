@@ -1,5 +1,5 @@
 <template>
-    <div style="padding: 35px;" align="left" :class="'card-panel ' + color + isDueDateToday() + isRemindDateIsToday()">
+    <div style="padding: 35px;" align="left" :class="'card-panel ' + isDueDateToday() + isRemindDateIsToday()">
         <div class="row waves-effect">
             <div class="left card-title">
                 <b>{{title}}</b>
@@ -8,12 +8,12 @@
         <div class="card-content">
           <p>{{description}}</p>
         </div>
-        <div class="row left" v-show="remindShow!=false">
+        <!--<div class="row left">
             <div><i class="material-icons left">announcement</i>{{ unixToDate(remindDate) }}</div>
         </div>
         <div class="row right">
             <div><i class="material-icons left">alarm</i>{{ unixToDate(dueDate) }}</div>
-        </div>
+        </div>-->
     </div>
 </template>
 
@@ -21,7 +21,7 @@
 
 export default {
 
-    props: ['title', 'description', 'dueDate', 'color', 'remindDate', 'taskId', 'remindShow'],
+    props: ['title', 'description', 'dueDate', 'color', 'remindDate', 'taskId'],
     data() {
         return {
             due_date : null,
@@ -33,17 +33,11 @@ export default {
         /*this.dueDate =  date;*/
     },
     beforeMount() {
-        this.due_date = new Date(0);
-        if(this.dueDate) {
-            this.due_date.setUTCSeconds(this.dueDate);
-        }
-        
+        /*this.due_date = new Date(0);
+        this.due_date.setUTCSeconds(this.dueDate);
 
         this.remind_date = new Date(0);
-        if(this.remindDate) {
-            this.remind_date.setUTCSeconds(this.remindDate);
-        }
-        
+        this.remind_date.setUTCSeconds(this.remindDate);*/
     },
     methods : {
         unixToDate(unix) {
@@ -54,14 +48,11 @@ export default {
             return date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
         },
         isDueDateToday() {
-            if(this.remindShow != false) {
-                var current = this.currentDate.getDate() + "/" + this.currentDate.getMonth() + "/" + this.currentDate.getFullYear();
-                var dueDateTemp = this.due_date.getDate() + "/" + this.due_date.getMonth() + "/" + this.due_date.getFullYear();
-                if(current == dueDateTemp) {
-                    return "red accent-1";
-                }
+            var current = this.currentDate.getDate() + "/" + this.currentDate.getMonth() + "/" + this.currentDate.getFullYear();
+            var dueDateTemp = this.due_date.getDate() + "/" + this.due_date.getMonth() + "/" + this.due_date.getFullYear();
+            if(current == dueDateTemp) {
+                return "red accent-1";
             }
-            
             return "";
         },
         isRemindDateIsToday() {

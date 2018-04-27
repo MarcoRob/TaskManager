@@ -18,11 +18,11 @@
         <div class="s12">
             <div class="row">
                 <div class="col s12 m4 l4" v-for="task in today_tasks" v-key="task.name">
-                    <Task :title="task.title" :dueDate="timeConverter(task.due_date)" :description="task.description" :color="task.color" />
+                    <Task :title="task.title"  :dueDate="task.dueDate" :remindShow="false" :description="task.description" color="yellow accent-1" />
                 </div>
             </div>
                 <div class="col s12 m4 l4" v-for="task in delayed_tasks" v-key="task.name">
-                    <Task :title="task.title" :dueDate="timeConverter(task.due_date)" :description="task.description" :color="task.color" />
+                    <Task :title="task.title" :dueDate="task.dueDate" :remindShow="false" :description="task.description" color="green accent-1" />
                 </div>
                 <div class="col s12 m4 l4" v-for="h in good_habits" v-key="h.id">
                     <Habit :key="h.id" :title="h.title" color="blue accent-1"/>
@@ -61,7 +61,7 @@ var habits = [{"id":1, "name":"Go to Gym", "color":"green accent-1"},
             }
         },
         beforeMount() {
-            axios.get(url.userReports_api + "/users/Arturo/reports")
+            axios.get(url.userReports_api + "/users/" + this.$route.params.userId + "/reports")
                 .then(res => {
                     this.today_tasks = res.data.todayTasks;
                     this.delayed_tasks = res.data.delayedTasks;
@@ -69,11 +69,11 @@ var habits = [{"id":1, "name":"Go to Gym", "color":"green accent-1"},
                     this.bad_habits = res.data.badHabits;
                 })
                 .catch(error => {
-                    alert(error.data);
+                    console.log(error);
                 })
         },
         methods : {
-            timeConverter(UNIX_timestamp){
+            /*timeConverter(UNIX_timestamp){
                 var a = new Date(UNIX_timestamp * 1000);
                 var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
                 var year = a.getFullYear();
@@ -84,7 +84,14 @@ var habits = [{"id":1, "name":"Go to Gym", "color":"green accent-1"},
                 var sec = a.getSeconds();
                 var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
                 return time;
-            }
+            },*/
+            timeConverter(unix) {
+                var un = parseInt(unix);
+                var date = new Date(0);
+                date.setUTCSeconds(un);
+                console.log(date + " date")
+                return date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+            },
         }
     }
 

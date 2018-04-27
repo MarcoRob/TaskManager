@@ -24,12 +24,12 @@
         <li :class="{active : activeOption == 'adminReport'}"><a @click="setActive('adminReport')"><i class="material-icons">insert_chart</i>Admin</a></li>
         <li>&nbsp;</li><li>&nbsp;</li>
         <li><div class="divider"></div></li>
-        <li>
+        <!--<li>
             <a @click="setActive('account')">
                 <i class="material-icons">account_circle</i>Account
             </a>
-        </li>
-        <li><a href="#"><i class="material-icons">exit_to_app</i>Sign Out</a></li>
+        </li>-->
+        <li><router-link to="/"><i class="material-icons">exit_to_app</i>Sign Out</router-link></li>
         <!--<li><a class="waves-effect" href="#!">Third Link With Waves</a></li>-->
     </ul>
 </template>

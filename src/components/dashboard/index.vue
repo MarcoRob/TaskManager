@@ -6,8 +6,7 @@
             <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">            
                 <li><a @click="openMenu"><i class="material-icons">menu</i></a></li>
-                <li><a href="sass.html"><i class="material-icons">account_circle</i></a></li>
-                <li><a href="badges.html"><i class="material-icons">exit_to_app</i></a></li>
+                <li><router-link to="/"><i class="material-icons">exit_to_app</i></router-link></li>
             </ul>
             </div>
         </nav>

@@ -23,6 +23,13 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="small material-icons prefix">notifications_none</i>
+                        <input type="date" v-model="remindDate">
+                        <label for="first_name">Remind Date</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="small material-icons prefix">notifications_none</i>
                         <input type="date" v-model="dueDate">
                         <label for="first_name">Due Date</label>
                     </div>
@@ -49,6 +56,7 @@ export default {
             title: "",
             description : "",
             dueDate : "",
+            remindDate : ""
         }
     },
     mounted() {
@@ -63,13 +71,23 @@ export default {
                 due_date.setMonth(parseInt(fieldDate[1]) - 1);
                 due_date.setDate(fieldDate[2]);
 
-            alert(due_date.toString());
+            var fieldRemind = this.remindDate.split("-");
+            console.log(fieldRemind);
+            var remind_date = new Date();
+                remind_date.setFullYear(fieldRemind[0]);
+                remind_date.setMonth(parseInt(fieldRemind[1]) - 1);
+                remind_date.setDate(fieldRemind[2]);
+
+            console.log(remind_date.toString());
+            console.log(due_date.toString() + "\n" + due_date.getTime());
                 due_date = Math.round(due_date.getTime() / 1000);
+                remind_date = Math.round(remind_date.getTime() / 1000);
 
             var newTask = {
                 title : this.title,
                 description : this.description,
                 dueDate : due_date,
+                remindDate : remind_date,
                 userId : this.$route.params.userId
             };
             axios.post(url.tasks_api + "/Task/tasks", newTask)
@@ -78,6 +96,7 @@ export default {
                     if(statusCode == 200) {
                         alert("Task Created");
                         this.tasks.push(res.data);
+                        location.reload();
                     }
                 })
                 .catch(error => {

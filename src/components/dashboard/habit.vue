@@ -12,14 +12,17 @@
                 </div>
             </div>
             <div class="row right">
-                <div class="col s4">
+                <div class="col s3" v-if="(type == 'good' || type == 'mixed')">
                     <a @click="increaseScore" class="btn-floating deep-purple lighten-1 waves-effect waves-light responsive-img"><i class="material-icons">add</i></a>
                 </div>
-                <div class="col s4">
+                <div class="col s3" v-if="(type == 'bad' || type == 'mixed')">
                     <a @click="decreaseScore" class="btn-floating green darken-1 waves-effect waves-light responsive-img"><i class="material-icons">remove</i></a>
                 </div>
-                <div class="col s4">
+                <div class="col s3">
                     <a @click="edit" class="btn-floating waves-effect white"><i class="material-icons black-text">edit</i></a>
+                </div>
+                <div class="col s3">
+                    <a @click="remove" class="btn-floating waves-effect white"><i class="material-icons black-text">delete</i></a>
                 </div>
             </div>
             <br/>
@@ -34,7 +37,7 @@ import axios from "axios";
 import url from "../../config";
 
 export default {
-    props: ["title", "color", "habitId", "score"],
+    props: ["title", "color", "habitId", "score", "type"],
     data() {
         return {
             score : 0
@@ -62,6 +65,16 @@ export default {
         edit() {
             var editHabit = M.Modal.init(document.getElementById(this.title));
                 editHabit.open();
+        },
+        remove() {
+            axios.delete(url.habits_api+"/habits/"+this.habitId)
+                .then(res => {
+                    alert(res.data.message);
+                    location.reload();
+                })
+                .catch(error => {
+                    alert(error);
+                })
         }
     }
 }

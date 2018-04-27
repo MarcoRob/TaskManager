@@ -86,9 +86,8 @@ export default {
             }
             axios.post(url.habits_api+"/habits", newHabit)
                 .then(res => {
-                    if(res.statusCode == 200) {
                         alert("Habit Created!");
-                    }
+                        location.reload();
                 })
                 .catch(error => {
                     alert(error);
